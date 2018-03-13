@@ -44,9 +44,10 @@ module FastJsonapi
 
           record_type = relationship[:record_type]
           empty_case = relationship[:relationship_type] == :has_many ? [] : nil
+          links = relationship[:block] ? relationship[:block].call(record) : {}
 
           relationships_hash[name] = {
-            links: relationship[:block].try(:call, record)
+            links: links
           }
 
           next unless relationship[:include_data]
