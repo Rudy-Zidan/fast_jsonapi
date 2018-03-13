@@ -88,7 +88,6 @@ module FastJsonapi
           record_type = @relationships_to_serialize[item][:record_type]
           serializer = @relationships_to_serialize[item][:serializer].to_s.constantize
           relationship_type = @relationships_to_serialize[item][:relationship_type]
-          next unless @relationships_to_serialize[item][:include_data]
           included_objects = record.send(object_method_name)
           next if included_objects.blank?
           included_objects = [included_objects] unless relationship_type == :has_many
